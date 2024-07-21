@@ -13,6 +13,7 @@ const Tasks = () => {
 
     const userData = JSON.parse(localStorage.getItem('userData')) || null;
     const [modal, setModal] = useState(false)
+    
     const navigate = useNavigate()
 
   return (

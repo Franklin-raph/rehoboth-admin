@@ -85,7 +85,7 @@ const SideNav = () => {
                 <p className="ml-[10px]">Promotions</p>
             </div>
           </Link>
-          <Link to='/tasks' className={ location.pathname.includes('tasks') ? `flex items-center justify-between py-[10px] text-[#072AC8] px-5 bg-[#072AC81F]` :`px-5 flex items-center justify-between py-[10px] text-[#101828]`}>
+          <Link to='/add-task' className={ location.pathname.includes('tasks') ? `flex items-center justify-between py-[10px] text-[#072AC8] px-5 bg-[#072AC81F]` :`px-5 flex items-center justify-between py-[10px] text-[#101828]`}>
             <div className="flex items-center">
                 <BiTask />
                 <p className="ml-[10px]">Tasks</p>

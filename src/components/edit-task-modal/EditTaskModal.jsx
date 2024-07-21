@@ -5,94 +5,98 @@ import Cookies from 'js-cookie'
 import Alert from '../alert/Alert'
 import { addHttps } from '../../utils'
 
-const AddTaskModal = ({setModal, getTasks}) => {
 
-  const [dropDown, setDropDown] = useState(false)
-  const [xp, setXp] = useState()
-  const [name, setName] = useState('')
-  const [url, setUrl] = useState('')
-  const [description, setDescription] = useState('')
-  const [loading, setLoading] = useState(false)
-  const API_KEY = process.env.VITE_API_KEY
-  const BASE_URL = import.meta.env.VITE_BASE_URL
-  const user = Cookies.get('token')
-  const [tasks, setTasks] = useState()
+const EditTaskModal = ({task, setModal, getTasks}) => {
 
-  const [msg, setMsg] = useState('')
-  const [alertType, setAlertType] = useState('')
+    console.log(task);
 
-  async function getTaskNames(){
-    console.log(user);
-    try {
-      const response = await fetch(`${BASE_URL}/admin/referralProgram/task-enum`, {
-        headers: {
-          'Api-Key': `GISUYDre8wt7984yupor5jp80YT%^%Rfuyih2wrk*&*^%&$^HJLIUTYDFwe576284`,
-          'Authorization': `Bearer ${user}`,
+    const [dropDown, setDropDown] = useState(false)
+    const [tasks, setTasks] = useState()
+    const [xp, setXp] = useState(task.xp)
+    const [name, setName] = useState(task.name)
+    const [url, setUrl] = useState(task.url)
+    const [description, setDescription] = useState(task.description)
+    const [loading, setLoading] = useState(false)
+    const API_KEY = process.env.VITE_API_KEY
+    const BASE_URL = import.meta.env.VITE_BASE_URL
+    const user = Cookies.get('token')
+  
+    const [msg, setMsg] = useState('')
+    const [alertType, setAlertType] = useState('')
+  
+    async function getTaskNames(){
+      console.log(user);
+      try {
+        const response = await fetch(`${BASE_URL}/admin/referralProgram/task-enum`, {
+          headers: {
+            'Api-Key': `GISUYDre8wt7984yupor5jp80YT%^%Rfuyih2wrk*&*^%&$^HJLIUTYDFwe576284`,
+            'Authorization': `Bearer ${user}`,
+          }
+        })
+        const data = await response.json()
+        console.log(data);
+        if(response.ok){
+          setTasks(data.data)
         }
-      })
-      const data = await response.json()
-      console.log(data);
-      if(response.ok){
-        setTasks(data.data)
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
+      return []
     }
-    return []
-  }
-
-  async function addTask(){
-    console.log({
-      xp:Number(xp),
-      name,
-      description
-    });
-    if(!xp ||!name ||!description){
-      setMsg('Please fill all required fields')
-      setAlertType('error')
-      return
-    }else{
-      setLoading(true)
-      console.log(url);
-      const response = await fetch(`${BASE_URL}/admin/referralProgram/create-task`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Api-Key': `GISUYDre8wt7984yupor5jp80YT%^%Rfuyih2wrk*&*^%&$^HJLIUTYDFwe576284`,
-          'Authorization': `Bearer ${user}`,
-        },
-        body: JSON.stringify({
-          xp:Number(xp),
-          name,
-          description,
-          url: addHttps(url)
-        }),
-      })
-      const data = await response.json()
-      console.log(response, data);
-      if(response) setLoading(false)
-      if(!response.ok){
-        setMsg(data?.message)
+  
+    async function updateTask(){
+      console.log({
+        xp:Number(xp),
+        name,
+        description
+      });
+      if(!xp ||!name ||!description){
+        setMsg('Please fill all required fields')
         setAlertType('error')
         return
-      }
-      if(response.ok){
-        setMsg('Task added successfully')
-        setAlertType('success')
-        // setModal(false)
-        setName('')
-        setDescription('')
-        setUrl('')
-        setXp('')
-        getTasks()
-        return
+      }else{
+        setLoading(true)
+        console.log(url);
+        const response = await fetch(`${BASE_URL}/admin/referralProgram/update-task/${task._id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Api-Key': `GISUYDre8wt7984yupor5jp80YT%^%Rfuyih2wrk*&*^%&$^HJLIUTYDFwe576284`,
+            'Authorization': `Bearer ${user}`,
+          },
+          body: JSON.stringify({
+            xp:Number(xp),
+            name,
+            description,
+            url: addHttps(url)
+          }),
+        })
+        const data = await response.json()
+        console.log(response, data);
+        if(response) setLoading(false)
+        if(!response.ok){
+          setMsg(data?.message)
+          setAlertType('error')
+          return
+        }
+        if(response.ok){
+          setMsg('Task Updated successfully')
+          setAlertType('success')
+          // setModal(false)
+          setName('')
+          setDescription('')
+          setUrl('')
+          setXp('')
+          getTasks()
+          return
+        }
       }
     }
-  }
+  
+    useEffect(() => {
+      getTaskNames()
+    },[])
 
-  useEffect(() => {
-    getTaskNames()
-  },[])
 
   return (
     <>
@@ -100,7 +104,7 @@ const AddTaskModal = ({setModal, getTasks}) => {
       <div className="bg-white w-[65%] fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] py-[12px] z-[102] rouunded-[10px]">
           <div className="flex items-center justify-between px-[2rem] flex-col pb-2">
             <div className='flex items-center justify-between w-full border-b'>
-              <p className='font-[500] text-[22px] mb-2 text-gray-500'>Add Task</p>
+              <p className='font-[500] text-[22px] mb-2 text-gray-500'>Update Task</p>
               <p className='text-[30px] cursor-pointer text-gray-500' onClick={() => setModal(false)}>&times;</p>
             </div>
             <div className='w-full'>
@@ -156,7 +160,7 @@ const AddTaskModal = ({setModal, getTasks}) => {
                   loading?
                   <BtnLoader />
                   :
-                  <button onClick={addTask} className="bg-primary-color text-white py-2 px-4 rounded-[8px] mt-5 w-full">Add Task</button>
+                  <button onClick={updateTask} className="bg-primary-color text-white py-2 px-4 rounded-[8px] mt-5 w-full">Update Task</button>
               }
               {/* <button className=''>Add Task</button> */}
             </div>
@@ -169,4 +173,4 @@ const AddTaskModal = ({setModal, getTasks}) => {
   )
 }
 
-export default AddTaskModal
+export default EditTaskModal
