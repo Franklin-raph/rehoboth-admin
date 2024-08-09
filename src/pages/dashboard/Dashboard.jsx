@@ -11,10 +11,10 @@ const Dashboard = () => {
   const userData = JSON.parse(localStorage.getItem('userData')) || null;
 
   const data = [
-    { name: 'Group A', value: 400, color: '#FFBB28' },
-    { name: 'Group B', value: 300, color: '#FF8042' },
-    { name: 'Group C', value: 300, color: '#00C49F' },
-    { name: 'Group D', value: 200, color: '#0088FE' },
+    { name: 'Cash Transactions', value: 20, color: '#FFBB28' },
+    { name: 'Deposit', value: 20, color: '#FF8042' },
+    { name: 'Withdrawal', value: 20, color: '#00C49F' },
+    { name: 'Saved', value: 20, color: '#0088FE' },
   ];
 
   const [loadingTx, setLoadingTx] = useState(false)
@@ -749,34 +749,34 @@ const Dashboard = () => {
                 <div className="p-[20px] mt-5 lg:mx-[25px] mx-[10px] bg-[#FFFFFF] border border-[#BDBDBD]">
                   <p className='text-[#121212] md:text-[24px] text-[18px]'>Hi, {userData?.data?.username}</p>
                   <p className='text-[#767676] text-[14px] font-[300]'>Welcome to Rehoboth finance </p>
-                  <div className='grid grid-cols-4 gap-4 mt-10 justify-between items-center'>
-                    <div className='border p-3 border-[#E1E1E1] rounded-[8px]'>
+                  <div className='grid grid-cols-2 gap-4 mt-10 justify-between items-center'>
+                    {/* <div className='border p-3 border-[#E1E1E1] rounded-[8px]'>
                       <div className='flex items-center justify-between mb-4'>
                         <p>Total Users</p>
                         <BiDotsVertical className='cursor-pointer' />
                       </div>
-                      <p className='text-[32px]'>1,892,019</p>
+                      <p className='text-[32px]'>0</p>
                     </div>
                     <div className='border p-3 border-[#E1E1E1] rounded-[8px]'>
                       <div className='flex items-center justify-between mb-4'>
                         <p>Transactions</p>
                         <BiDotsVertical className='cursor-pointer' />
                       </div>
-                      <p className='text-[32px] flex items-end'>521,092,380 <span className='text-[14px] mb-[0.5rem]'>NGN</span> </p>
-                    </div>
+                      <p className='text-[32px] flex items-end'>0 <span className='text-[14px] mb-[0.5rem]'>NGN</span> </p>
+                    </div> */}
                     <div className='border p-3 border-[#E1E1E1] rounded-[8px]'>
                       <div className='flex items-center justify-between mb-4'>
                         <p>Total Users</p>
                         <BiDotsVertical className='cursor-pointer' />
                       </div>
-                      <p className='text-[32px]'>1,892,019</p>
+                      <p className='text-[32px]'>0</p>
                     </div>
                     <div className='border p-3 border-[#E1E1E1] rounded-[8px]'>
                       <div className='flex items-center justify-between mb-4'>
-                        <p>Total Users</p>
+                        <p>Transactions</p>
                         <BiDotsVertical className='cursor-pointer' />
                       </div>
-                      <p className='text-[32px]'>1,892,019</p>
+                      <p className='text-[32px] flex items-end'>0 <span className='text-[14px] mb-[0.5rem]'>NGN</span> </p>
                     </div>
                   </div>
 
@@ -810,28 +810,28 @@ const Dashboard = () => {
                                 <div className='p-[2px] bg-red-500 rounded-full'></div>
                                 <p className='text-[12px] texxt-[#707070]'>Cash Transactions</p>
                               </div>
-                              <p className='text-[26px] ml-[-30px]'>30.05%</p>
+                              <p className='text-[26px] ml-[-30px]'>0</p>
                             </div>
                             <div className='text-center'>
                               <div className='flex items-center gap-2'>
                                 <div className='p-[2px] bg-red-500 rounded-full'></div>
                                 <p className='text-[12px] texxt-[#707070]'>Deposit</p>
                               </div>
-                              <p className='text-[26px] ml-[-30px]'>17.10%</p>
+                              <p className='text-[26px] ml-[-30px]'>0</p>
                             </div>
                             <div className='text-center'>
                               <div className='flex items-center gap-2'>
                                 <div className='p-[2px] bg-red-500 rounded-full'></div>
                                 <p className='text-[12px] texxt-[#707070]'>Withdrawal</p>
                               </div>
-                              <p className='text-[26px] ml-[-30px]'>32.64%</p>
+                              <p className='text-[26px] ml-[-30px]'>0</p>
                             </div>
                             <div className='text-center'>
                               <div className='flex items-center gap-2'>
                                 <div className='p-[2px] bg-red-500 rounded-full'></div>
                                 <p className='text-[12px] texxt-[#707070]'>Saved</p>
                               </div>
-                              <p className='text-[26px] ml-[-30px]'>20.22%</p>
+                              <p className='text-[26px] ml-[-30px]'>0</p>
                             </div>
                           </div>
                         </div>
@@ -842,20 +842,23 @@ const Dashboard = () => {
                       <p className='text-[#6C6C6B] mb-2'>Top Affiliates</p>
                       <div className='flex flex-col gap-2 p-[30px] border w-full rounded-[8px] h-[430px] overflow-y-scroll'>
                       {
-                        [1,1,1,1,1,1,1,1,1].map((data, index) => (
-                            <div className='flex justify-between my-3'>
-                                <div className='flex items-center'>
-                                  <p>{index + 1}.</p>
-                                  <div className="flex ml-4">
-                                    <img src="./images/user.svg" className="w-[40px] mr-2"/>
-                                    <div>
-                                      <p className='text-[#101828] text-[14px] font-[500]'>Sean Anthony</p>
-                                      <p className="text-[#6F7975] text-[12px]">drew@untitledui.com</p>
+                        [1].map((data, index) => (
+                          <div>
+                            <p className='text-center mt-10'>No Top Affiliates yet</p>
+                              {/* <div className='flex justify-between my-3'>
+                                  <div className='flex items-center'>
+                                    <p>{index + 1}.</p>
+                                    <div className="flex ml-4">
+                                      <img src="./images/user.svg" className="w-[40px] mr-2"/>
+                                      <div>
+                                        <p className='text-[#101828] text-[14px] font-[500]'>Sean Anthony</p>
+                                        <p className="text-[#6F7975] text-[12px]">drew@untitledui.com</p>
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                                <p className='font-[500]'>₦2,345,950</p>
-                            </div>
+                                  <p className='font-[500]'>₦2,345,950</p>
+                              </div> */}
+                          </div>
                         ))
                       }
                       </div>

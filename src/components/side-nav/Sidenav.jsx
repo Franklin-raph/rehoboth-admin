@@ -117,7 +117,7 @@ const SideNav = () => {
 
         <div className="ml-[10px] mt-[15rem] mb-16">
           <div className="flex align-center">
-              <img src={userData?.userProfileUrl} className="w-[50px]" style={{ marginRight: 12, }} />
+              <img src={userData?.userProfileUrl} className="w-[50px] h-[50px] rounded-[50%]" style={{ marginRight: 12, }} />
               <div>
                 <p className='text-[#101828] text-[14px] font-[500]'>{userData?.username}</p>
                 <p className="text-[#6F7975] text-[12px]">{userData?.primaryEmail}</p>
