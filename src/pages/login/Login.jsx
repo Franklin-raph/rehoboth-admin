@@ -8,6 +8,7 @@ import Alert from '../../components/alert/Alert';
 import { GoEye, GoEyeClosed } from 'react-icons/go';
 import Cookies from 'js-cookie';
 import BtnLoader from '../../components/btn-loader/BtnLoader';
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Login = () => {
 
@@ -20,6 +21,7 @@ const Login = () => {
     const API_KEY = process.env.VITE_API_KEY
     const BASE_URL = import.meta.env.VITE_BASE_URL
     const [loading, setLoading] = useState(false)
+    const recaptchaRef = useRef(null)
     
 
     const navigate = useNavigate()
@@ -86,6 +88,10 @@ const Login = () => {
         }
     }
 
+    const handleCaptchaChange = (value) => {
+        setCaptchaValue(value);
+    }
+
   return (
     <div className="relative">
         <AuthNav />
@@ -142,6 +148,13 @@ const Login = () => {
                             Don't have an account? <Link to="/create-account" className="text-blue-600">Register</Link>
                         </div>
                     </form>
+                </div>
+                <div className='flex items-center justify-center mt-3'>
+                    <ReCAPTCHA
+                        ref={recaptchaRef}
+                        sitekey={process.env.VITE_SITE_KEY}
+                        onChange={handleCaptchaChange}
+                    />
                 </div>
             </div>
         </div>

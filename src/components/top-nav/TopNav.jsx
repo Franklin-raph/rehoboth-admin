@@ -71,7 +71,7 @@ const TopNav = () => {
   return (
     <div>
       <div className='bg-[#FFFFFF] border border-[#BDBDBD] rounded-[8px] hidden lg:flex items-center justify-center gap-[70px] w-[95%] py-[1.2rem] top-0 right-0 z-[99] mx-auto mt-[1.2rem] relative'>
-        <div className='flex items-center gap-5'>
+        {/* <div className='flex items-center gap-5'>
           <div className='flex items-center gap-2'>
             <img src="./images/overview.svg" alt="" />
             <p>
@@ -84,7 +84,7 @@ const TopNav = () => {
           </div>
         </div>
         <div className='flex items-center gap-2'>
-          {/* <img src="./images/moon.svg" alt="" /> */}
+          <img src="./images/moon.svg" alt="" />
           <div className='p-2 rounded-[8px] bg-[#B9B9B926]'>
             <img src="./images/notification.svg" alt="" className='cursor-pointer'  onClick={() => setNotification(true)} />
           </div>
@@ -111,7 +111,7 @@ const TopNav = () => {
               })
             }
           </div>
-        }
+        } */}
       </div>
       <div className={mobileNav === true ? `p-[20px] flex items-center justify-between border z-[9999] lg:hidden fixed w-full bg-[#F5F5F5]` : `p-[20px] flex lg:hidden items-center justify-between border`}>
         <Link  to='/' className=''>
