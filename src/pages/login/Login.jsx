@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { FiLoader } from "react-icons/fi";
 import { FaChevronDown } from "react-icons/fa6";
@@ -18,9 +18,11 @@ const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordType, setPasswordType] = useState('password')
-    const API_KEY = process.env.VITE_API_KEY
+    const API_KEY = import.meta.env.VITE_API_KEY
     const BASE_URL = import.meta.env.VITE_BASE_URL
+    const SITE_KEY = import.meta.env.VITE_SITE_KEY
     const [loading, setLoading] = useState(false)
+    const [captchaValue, setCaptchaValue] = useState('')
     const recaptchaRef = useRef(null)
     
 
@@ -29,6 +31,8 @@ const Login = () => {
     useEffect(() => {
         const token = Cookies.get('token')
         if(token) navigate('/dashboard')
+        console.log(BASE_URL);
+        
     }, [])
 
         async function handleSignIn(e){
@@ -46,11 +50,12 @@ const Login = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Api-Key': `GISUYDre8wt7984yupor5jp80YT%^%Rfuyih2wrk*&*^%&$^HJLIUTYDFwe576284`,
+                    'Api-Key': `${API_KEY}`,
                 },
                 body: JSON.stringify({
                     email,
                     password,
+                    captcha:captchaValue
                 })
                 })
                 if(res) setLoading(false)
@@ -152,7 +157,7 @@ const Login = () => {
                 <div className='flex items-center justify-center mt-3'>
                     <ReCAPTCHA
                         ref={recaptchaRef}
-                        sitekey={process.env.VITE_SITE_KEY}
+                        sitekey={SITE_KEY}
                         onChange={handleCaptchaChange}
                     />
                 </div>

@@ -67,25 +67,25 @@ const SideNav = () => {
                 <p className="ml-[10px]">Dashboard</p>
             </div>
           </Link>
-          <Link to='/earn-points' className={ location.pathname.includes('/earn-points') ? `flex items-center justify-between py-[10px] text-[#072AC8] px-5 bg-[#072AC81F]` :`px-5 flex items-center justify-between py-[10px] text-[#101828]`}>
+          <Link to='/users' className={ location.pathname.includes('/users') ? `flex items-center justify-between py-[10px] text-[#072AC8] px-5 bg-[#072AC81F]` :`px-5 flex items-center justify-between py-[10px] text-[#101828]`}>
             <div className="flex items-center">
                 <PiUsersThreeLight />
                 <p className="ml-[10px]">Users</p>
             </div>
           </Link>
-          <Link to='/earn-points' className={ location.pathname.includes('/earn-points') ? `flex items-center justify-between py-[10px] text-[#072AC8] px-5 bg-[#072AC81F]` :`px-5 flex items-center justify-between py-[10px] text-[#101828]`}>
+          <Link to='#' className={ location.pathname.includes('/earn-points') ? `flex items-center justify-between py-[10px] text-[#072AC8] px-5 bg-[#072AC81F]` :`px-5 flex items-center justify-between py-[10px] text-[#101828]`}>
             <div className="flex items-center">
                 <HiOutlineBriefcase />
                 <p className="ml-[10px]">Administrators</p>
             </div>
           </Link>
-          <Link to='/earn-points' className={ location.pathname.includes('/earn-points') ? `flex items-center justify-between py-[10px] text-[#072AC8] px-5 bg-[#072AC81F]` :`px-5 flex items-center justify-between py-[10px] text-[#101828]`}>
+          {/* <Link to='/earn-points' className={ location.pathname.includes('/earn-points') ? `flex items-center justify-between py-[10px] text-[#072AC8] px-5 bg-[#072AC81F]` :`px-5 flex items-center justify-between py-[10px] text-[#101828]`}>
             <div className="flex items-center">
                 <LuBadgePercent />
                 <p className="ml-[10px]">Promotions</p>
             </div>
-          </Link>
-          <Link to='/add-task' className={ location.pathname.includes('tasks') ? `flex items-center justify-between py-[10px] text-[#072AC8] px-5 bg-[#072AC81F]` :`px-5 flex items-center justify-between py-[10px] text-[#101828]`}>
+          </Link> */}
+          <Link to='/add-task' className={ location.pathname.includes('task') ? `flex items-center justify-between py-[10px] text-[#072AC8] px-5 bg-[#072AC81F]` :`px-5 flex items-center justify-between py-[10px] text-[#101828]`}>
             <div className="flex items-center">
                 <BiTask />
                 <p className="ml-[10px]">Tasks</p>
@@ -101,12 +101,6 @@ const SideNav = () => {
               <p className="ml-[10px]">Settings</p>
             </div>
           </Link>
-          <Link to='/help-and-support' className={ location.pathname.includes('/help-and-support') ? `flex items-center justify-between py-[10px] text-[#072AC8] bg-[#072AC81F] px-5` :`px-5 flex items-center justify-between py-[10px] text-[#101828]`}>
-            <div className="flex items-center">
-                <TbMessageQuestion />
-                <p className="ml-[10px]">Help & Support</p>
-            </div>
-          </Link>
           <div onClick={handleLogout} className='cursor-pointer px-5 flex items-center justify-between py-[10px] text-[#101828]'>
             <div className="flex items-center">
               <TbLogout />
@@ -116,9 +110,7 @@ const SideNav = () => {
         </div>
 
         <div className="ml-[10px] mt-[15rem] mb-16">
-          <div className="flex align-center">
-              <img src={userData?.userProfileUrl} className="w-[50px] h-[50px] rounded-[50%]" style={{ marginRight: 12, }} />
-              <div>
+          <div className="flex align-center"><div>
                 <p className='text-[#101828] text-[14px] font-[500]'>{userData?.username}</p>
                 <p className="text-[#6F7975] text-[12px]">{userData?.primaryEmail}</p>
               </div>
