@@ -15,8 +15,8 @@ const Login = () => {
     const [msg, setMsg] = useState('')
     const [alertType, setAlertType] = useState('')
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('igboekwulusifranklin@gmail.com')
+    const [password, setPassword] = useState('frank')
     const [passwordType, setPasswordType] = useState('password')
     const API_KEY = import.meta.env.VITE_API_KEY
     const BASE_URL = import.meta.env.VITE_BASE_URL

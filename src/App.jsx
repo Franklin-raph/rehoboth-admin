@@ -10,6 +10,7 @@ import Tasks from './pages/tasks/Tasks'
 import AddTask from './pages/add-task/AddTask'
 import Users from './pages/users/Users'
 import Settings from './pages/settings/Settings'
+import Admins from './pages/admins/Admins'
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/users" element={<Users />} />
           <Route path="/add-task" element={<AddTask />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/admins" element={<Admins />} />
         </Route>
       </Routes>
     </HashRouter>

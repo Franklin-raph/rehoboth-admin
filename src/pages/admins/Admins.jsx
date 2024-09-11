@@ -6,28 +6,20 @@ import { PieChart, Pie, Cell, Tooltip } from 'recharts';
 import { PiArrowElbowUpLeftLight } from 'react-icons/pi';
 import { MdCancel } from 'react-icons/md';
 
-const Dashboard = () => {
+const Admins = () => {
 
   const userData = JSON.parse(localStorage.getItem('userData')) || null;
 
   useEffect(() => {
     console.log(userData?.data?.token);
-    
+    getAllAdmins()
     getLeaderBoard()
-    getAllUsers()
   },[])
-
-  // const data = [
-  //   { name: 'Cash Transactions', value: 20, color: '#FFBB28' },
-  //   { name: 'Deposit', value: 20, color: '#FF8042' },
-  //   { name: 'Withdrawal', value: 20, color: '#00C49F' },
-  //   { name: 'Saved', value: 20, color: '#0088FE' },
-  // ];
 
   const [loadingTx, setLoadingTx] = useState(false)
   const [searchText, setSearchText] = useState('')
-  const [leaderboardData, setLeaderboardData] = useState([])
   const [allUsers, setAllUsers] = useState([])
+  const [leaderboardData, setLeaderboardData] = useState([])
   const API_KEY = import.meta.env.VITE_API_KEY
   const BASE_URL = import.meta.env.VITE_BASE_URL
 
@@ -44,10 +36,8 @@ const Dashboard = () => {
     console.log(res, data);
 }
 
-  console.log(userData);
-
-  async function getAllUsers() {
-    const res = await fetch(`${BASE_URL}/admin/users`,{
+  async function getAllAdmins() {
+    const res = await fetch(`${BASE_URL}/admin/admins`,{
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${userData?.data?.token}`,
@@ -56,8 +46,10 @@ const Dashboard = () => {
     })
     const data = await res.json()
     setAllUsers(data.data)
-    console.log(res, data.data.users);
+    console.log(res, data.data);
 }
+
+  console.log(userData);
 
   return (
     <div>
@@ -71,50 +63,24 @@ const Dashboard = () => {
                   <div className='grid grid-cols-1 gap-4 mt-10 justify-between items-center'>
                     <div className='border p-3 border-[#E1E1E1] rounded-[8px]'>
                       <div className='flex items-center justify-between mb-4'>
-                        <p>Total Users</p>
+                        <p>Total Admins</p>
                         <BiDotsVertical className='cursor-pointer' />
                       </div>
                       <p className='text-[32px]'>{allUsers?.count}</p>
                     </div>
-                    {/* <div className='border p-3 border-[#E1E1E1] rounded-[8px]'>
-                      <div className='flex items-center justify-between mb-4'>
-                        <p>Transactions</p>
-                        <BiDotsVertical className='cursor-pointer' />
-                      </div>
-                      <p className='text-[32px] flex items-end'>0 <span className='text-[14px] mb-[0.5rem]'>NGN</span> </p>
-                    </div> */}
                   </div>
-
-                  
 
                   <div className='mt-[3rem]'>
                     <p className='text-[#121212] sm:text-[20px] mb-3'>All Users</p>
                     <div className='border p-[3px] rounded-[7px]'>
-                      <div className='flex items-center justify-between mb-10'>
-                        {/* <div className='flex items-center gap-2'>
-                          <div className='flex items-center gap-1 p-1 rounded-full'>
-                            <BiFilter />
-                            <p>Filter</p>
-                            <BiChevronDown />
-                          </div>
-                          <div className='flex items-center gap-1 p-1 rounded-full'>
-                            <BiFilter />
-                            <p>Sort</p>
-                            <BiChevronDown />
-                          </div>
-                          <div className='flex items-center gap-1 p-1 rounded-full text-primary-color'>
-                            <BiFilter />
-                            <p>Yesterday</p>
-                            <MdCancel />
-                          </div>
-                        </div> */}
-                        <div className='flex items-center gap-2 border rounded-full py-[6px] px-3 m-3 w-[30%]'>
+                      <div className='flex items-center justify-center mb-10'>
+                        <div className='flex items-center gap-2 border rounded-full py-[6px] px-3 m-3 w-[40%] mx-auto'>
                             <BiSearch />
                             <input onChange={e => setSearchText(e.target.value)} type="text" className='w-full py-1 bg-transparent outline-none text-[12px] text-[#0E0F0C]' placeholder='Filter Users'/>
                         </div>
                       </div>
                       <div className="relative overflow-x-auto">                    
-                      <table className="w-full text-sm text-left rtl:text-left">
+                        <table className="w-full text-sm text-left rtl:text-left">
                             <thead className="text-[12px] text-[#121212]">
                                 <tr>
                                     <th scope="col" className="px-6 py-3 th1 font-[400]">S/N</th>
@@ -137,7 +103,7 @@ const Dashboard = () => {
                             }
                             <tbody>
                                 {
-                                    allUsers?.users?.filter(user => user?.username?.includes(searchText?.toLowerCase()))
+                                    allUsers?.admins?.filter(user => user?.username?.includes(searchText?.toLowerCase()))
                                     .map((user, index) => {
                                         return (
                                             <tr style={{borderBottom:"1px solid #dcdcdc"}} className='text-[12px] cursor-pointer' onClick={() => transactionInfo(transaction)}>
@@ -174,4 +140,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default Admins
