@@ -81,6 +81,7 @@ async function toggleUserSuspension(){
     const data = await res.json()
     console.log(res, data);
     if(res.ok){
+      setSuspendUser(false)
       getAllUsers()
       setAlertType('success')
       setMsg('User suspension toggled successfully')
@@ -92,8 +93,10 @@ async function toggleUserSuspension(){
 }
 
 async function toggleUserRole(){
+  console.log(makeAdmin);
+  
   setLoadingTx(true)
-  const res = await fetch(`${BASE_URL}/owner/addOrRemoveAdmin/${suspendedUser}`,{
+  const res = await fetch(`${BASE_URL}/owner/addOrRemoveAdmin/${makeAdmin}`,{
         method: 'PUT',
         headers: {
             'Authorization': `Bearer ${userData?.data?.token}`,
@@ -104,13 +107,14 @@ async function toggleUserRole(){
     const data = await res.json()
     console.log(res, data);
     if(res.ok){
+      setMakeAdmin(false)
       getAllUsers()
       setAlertType('success')
-      setMsg('User suspension toggled successfully')
+      setMsg(data.message)
       getAllUsers()
     }else{
       setAlertType('error')
-      setMsg('Failed to toggle user suspension')
+      setMsg(data.message)
     }
 }
 
